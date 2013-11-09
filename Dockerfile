@@ -22,3 +22,7 @@ RUN apt-get install -y git && apt-get clean
 # Install x264
 ENV X264_SHA 1ca7bb9
 RUN cd /tmp && git clone --depth 1 --branch $X264_SHA git://git.videolan.org/x264.git && cd x264 && ./configure --prefix=$INSTALL_DIR --enable-static --enable-shared && make && make install && cd .. && rm -rf x264
+
+# Install fdk-aac
+ENV FDK_AAC_TAG v0.1.2
+RUN cd /tmp && git clone --depth 1 --branch $FDK_AAC_TAG git://github.com/mstorsjo/fdk-aac.git && cd fdk-aac && autoreconf -fiv && ./configure --prefix=$INSTALL_DIR --enable-static --enable-shared && make && make install && cd .. && rm -rf fdk-aac
