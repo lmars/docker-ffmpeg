@@ -15,3 +15,10 @@ RUN apt-get install -y build-essential && apt-get clean
 # Install YASM
 ENV YASM_VERSION 1.2.0
 RUN cd /tmp && wget http://www.tortall.net/projects/yasm/releases/yasm-$YASM_VERSION.tar.gz && tar xzvf yasm-$YASM_VERSION.tar.gz && cd yasm-$YASM_VERSION && ./configure --prefix=$INSTALL_DIR && make && make install && cd .. && rm -rf yasm-*
+
+# Install git
+RUN apt-get install -y git && apt-get clean
+
+# Install x264
+ENV X264_SHA 1ca7bb9
+RUN cd /tmp && git clone --depth 1 --branch $X264_SHA git://git.videolan.org/x264.git && cd x264 && ./configure --prefix=$INSTALL_DIR --enable-static --enable-shared && make && make install && cd .. && rm -rf x264
