@@ -1,4 +1,4 @@
-FROM stackbrew/ubuntu:precise
+FROM ubuntu:precise
 MAINTAINER Lewis Marshall <lewis@lmars.net>
 
 ENV INSTALL_DIR /usr/local
