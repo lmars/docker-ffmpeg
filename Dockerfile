@@ -28,8 +28,12 @@ RUN cd /tmp && \
     cd /tmp && \
     rm -rf yasm*
 
-# Install git
-RUN apt-get install -y git && apt-get clean
+# Install recent version of git
+RUN apt-get install -y python-software-properties && \
+    add-apt-repository -y ppa:git-core/ppa && \
+    apt-get update && \
+    apt-get install -y git
+    apt-get clean
 
 # Install x264
 ENV X264_SHA c628e3b
