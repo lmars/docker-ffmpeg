@@ -69,3 +69,27 @@ RUN cd /tmp && \
     make install && \
     cd /tmp && \
     rm -rf libvpx
+
+# Install ffmpeg
+ENV FFMPEG_TAG n1.2.4
+RUN cd /tmp && \
+    git clone --depth 1 --branch $FFMPEG_TAG  git://source.ffmpeg.org/ffmpeg && \
+    cd ffmpeg && \
+    ./configure --prefix=$INSTALL_DIR \
+      --extra-cflags="-I${INSTALL_DIR}/include" \
+      --extra-ldflags="-L${INSTALL_DIR}/lib" \
+      --extra-libs="-ldl" \
+      --enable-gpl \
+      --enable-libass \
+      --enable-libfdk-aac \
+      --enable-libmp3lame \
+      --enable-libtheora \
+      --enable-libvorbis \
+      --enable-libvpx \
+      --enable-libx264 \
+      --enable-shared \
+      --enable-nonfree && \
+    make && \
+    make install && \
+    cd /tmp && \
+    rm -rf ffmpeg
