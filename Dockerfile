@@ -11,7 +11,7 @@ RUN sed -re 's/ main$/ main restricted universe multiverse/g' -e "s:/archive\.:/
 
 # Install dependent packages
 RUN apt-get install -y autoconf automake libass-dev libgpac-dev libmp3lame-dev git \
-    libtheora-dev libtool libvorbis-dev pkg-config texi2html wget && \
+    libfreetype6-dev libtheora-dev libtool libvorbis-dev pkg-config texi2html wget && \
     apt-get clean
 
 # Install build tools
@@ -82,9 +82,14 @@ RUN cd /tmp && \
       --enable-libvorbis \
       --enable-libvpx \
       --enable-libx264 \
+      --enable-libfreetype \
       --enable-shared \
       --enable-nonfree && \
     make && \
     make install && \
     cd /tmp && \
     rm -rf ffmpeg
+
+# Install DejaVu font
+RUN apt-get install -y ttf-dejavu && \
+    apt-get clean
