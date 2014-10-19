@@ -90,6 +90,9 @@ RUN cd /tmp && \
     cd /tmp && \
     rm -rf ffmpeg
 
+# Update linker db
+RUN ldconfig
+
 # Install DejaVu font
 RUN apt-get install -y ttf-dejavu && \
     apt-get clean
