@@ -96,3 +96,11 @@ RUN ldconfig
 # Install DejaVu font
 RUN apt-get install -y ttf-dejavu && \
     apt-get clean
+
+# Install gem
+ADD . /gem
+RUN apt-get install -y ruby ruby-dev && \
+    cd /gem && \
+    gem build ffmpeg.gemspec && \
+    gem install ffmpeg-*.gem && \
+    apt-get clean
